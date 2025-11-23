@@ -1,0 +1,15 @@
+﻿{
+  "model": "Qwen/Qwen2-0.5B-Instruct",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Du bist ein hilfreicher Assistent und antwortest auf Deutsch."
+    },
+    {
+      "role": "user",
+      "content": "Schreibe einen kurzen Satz über Bananen."
+    }
+  ],
+  "temperature": 0.2,
+  "max_tokens": 64
+}

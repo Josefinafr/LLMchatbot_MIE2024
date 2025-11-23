@@ -1,0 +1,16 @@
+PatientAccountID,MPINumber,AssessmentID,Source,CollectedDT,Finding,FindingName,FindingDataType,Value,AdditionalInformation
+,P-5xxxxxxxx,,Stammdaten,Jul xx 20xx  xx:xxAM,Geburtsdatum,,9,xx/19xx,
+,P-5xxxxxxxx,,Stammdaten,Jun xx 20xx  xx:xxPM,Geschlecht,,1,männlich,
+P-8xxxxxxxxx,P-5xxxxxxxx,,Diagnosen,Jun  xx 20xx  xx:xxAM,Diagnose,,1,N18.0,Terminale Niereninsuffizienz
+P-8xxxxxxxxx,P-5xxxxxxxx,,Diagnosen,Jun xx 20xx  xx:xxPM,Diagnose,,1,G63.2*,Diabetische Polyneuropathie
+P-8xxxxxxxxx,P-5xxxxxxxx,,Diagnosen,Jun xx 20xx  xx:xxPM,Diagnose,,1,H36.0*,Retinopathia diabetica
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,Stix_Leukos_dt,,1,2+,''
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,HBA1CNV,,1,4.9,%
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,HBA1CkonzVista,,1,18.0,mmol/mol
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,HBA1CNV,,1,4.9,%
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,QUAlbKrea,,1,Berechnung nicht möglich ,mg/g
+P-1xxxxxxxxx,P-5xxxxxxxx,,Labor,Aug xx 20xx  xx:xxPM,Sed_Bakt_dt,,1,mäßig (+),Zahl/Feld
+,P-7xxxxxxxx,,Stammdaten,May xx 20xx  xx:xxPM,Geburtsdatum,,9,xx/19xx,
+,P-7xxxxxxxx,,Stammdaten,Oct xx 20xx  xx:xxPM,Geschlecht,,1,weiblich,
+P-xxxxxxxxx9,P-7xxxxxxxx,,Diagnosen,Oct xx 20xx  xx:xxPM,Diagnose,,1,E11.70+,Nicht primär insulinabhängiger Diabetes mellitus [Typ-2-Diabetes] mit multiplen Komplikationen
+P-xxxxxxxxx9,P-7xxxxxxxx,,Diagnosen,Oct xx 20xx  xx:xxPM,Diagnose,,1,H36.0*,Retinopathia diabetica

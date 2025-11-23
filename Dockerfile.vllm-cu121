@@ -1,0 +1,21 @@
+﻿FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git wget curl ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PIP_NO_CACHE_DIR=1
+RUN python -m pip install --upgrade pip
+
+# PyTorch CUDA 12.1 Wheels (passen zu deinem Treiber)
+RUN pip install --extra-index-url https://download.pytorch.org/whl/cu121 \
+    torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+
+# vLLM ohne Outlines (v0.4.2 ist stabil und benötigt kein outlines)
+RUN pip install vllm==0.4.2 uvicorn[standard] fastapi
+
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+EXPOSE 8000
+CMD ["python","-m","vllm.entrypoints.openai.api_server","--host","0.0.0.0","--port","8000"]

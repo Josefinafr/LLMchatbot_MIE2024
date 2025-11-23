@@ -1,0 +1,37 @@
+services:
+  vllm:
+    build:
+      context: .
+      dockerfile: Dockerfile.vllm-cu121
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+      --model ${MODEL_ID}
+      --host 0.0.0.0
+      --port ${VLLM_PORT}
+      --dtype float16
+      --gpu-memory-utilization 0.90
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    ports:
+      - "${VLLM_PORT}:${VLLM_PORT}"
+    gpus: all
+    shm_size: "2g"
+    volumes:
+      - ./models:/root/.cache/huggingface
+      - ./data:/workspace/data
+
+  jupyter:
+    image: python:3.11-slim
+    working_dir: /workspace
+    command: >
+      sh -c "pip install --no-cache-dir jupyterlab requests pandas matplotlib &&
+             jupyter lab --ip=0.0.0.0 --port=${JUPYTER_PORT} --no-browser --allow-root"
+    volumes:
+      - ./:/workspace
+    ports:
+      - "${JUPYTER_PORT}:${JUPYTER_PORT}"
+    depends_on:
+      - vllm
+    restart: unless-stopped
