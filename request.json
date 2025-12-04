@@ -7,7 +7,7 @@
     },
     {
       "role": "user",
-      "content": "Schreibe einen kurzen Satz über Bananen."
+      "content": "Schreibe einen kurzen Satz über Banane."
     }
   ],
   "temperature": 0.2,
