@@ -1,0 +1,14 @@
+# =========================
+# Local LLM models
+# =========================
+models/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local env / secrets
+.env
