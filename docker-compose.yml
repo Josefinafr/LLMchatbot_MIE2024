@@ -1,32 +1,24 @@
+version: "3.9"
+
 services:
-  vllm:
+  qwen:
     image: vllm/vllm-openai:v0.5.4
+    container_name: qwen-local
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ./models/Qwen2-0.5B-Instruct:/model
     command: >
-      python -m vllm.entrypoints.openai.api_server
-      --model Qwen/Qwen2-0.5B-Instruct
+      --model /model
+      --served-model-name qwen
       --host 0.0.0.0
       --port 8000
       --dtype float16
       --max-model-len 2048
       --gpu-memory-utilization 0.90
-    ports:
-      - "8000:8000"
-    deploy: {}
-    gpus: all
-
-  jupyter:
-    image: python:3.11-slim
-    working_dir: /workspace
-    command: >
-      sh -c "pip install --no-cache-dir jupyterlab openai &&
-             jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
-    volumes:
-      - ./:/workspace
-    environment:
-      - OPENAI_API_BASE=http://vllm:8000/v1
-      - OPENAI_API_KEY=EMPTY
-      - OPENAI_MODEL_NAME=Qwen/Qwen2-0.5B-Instruct
-    ports:
-      - "8888:8888"
-    depends_on:
-      - vllm
