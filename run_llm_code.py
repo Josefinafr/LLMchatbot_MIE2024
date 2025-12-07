@@ -6,61 +6,6 @@ df = pd.read_csv("testdata_MIE.csv")
 
 def run_llm_output(df):
     #############################
-    required = {'Finding', 'Value', 'MPINumber'}
-    missing = required.difference(df.columns)
-    if missing:
-        raise ValueError(f'Missing required columns: {missing}')
-    mask = (df['Finding'] == 'Diagnose') & df['Value'].str.contains('H36', na=False)
-    subset = df.loc[mask]
-    n_patients = subset['MPINumber'].nunique()
-    print('Number of patients diagnosed with H36:', n_patients)
-    #############################
-
-    #Eigentlichen Code ausgaeben
-    #RQ-A
-    '''
-    query = "How many patients got diagnosed with H36? Consider that each patient can have multiple findings."
-
-    Erwarteter Code:
-        required = {'Finding', 'Value', 'MPINumber'}
-        missing = required.difference(df.columns)
-        if missing:
-            raise ValueError(f'Missing required columns: {missing}')
-
-        mask = (df['Finding'] == 'Diagnose') & df['Value'].str.contains('H36', na=False)
-        subset = df.loc[mask]
-        n_patients = subset['MPINumber'].nunique()
-        print('Number of patients diagnosed with H36:', n_patients)
-
-    '''
-
-        #RQ-B
-    '''
-    query = "Given the dataframe above, create a pie chart for the Gender distribution."
-
-    Erwarteter Code:
-        import matplotlib.pyplot as plt
-
-        if 'Gender' not in df.columns and 'Geschlecht' not in df.columns:
-            raise ValueError("The dataset does not contain a dedicated gender column ('Gender' or 'Geschlecht').")
-
-        col = 'Gender' if 'Gender' in df.columns else 'Geschlecht'
-        counts = df[col].value_counts()
-
-        plt.pie(counts.values, labels=counts.index, autopct='%1.1f%%')
-        plt.title('Gender distribution')
-        plt.tight_layout()
-        plt.show()
-
-    '''
-
-         #RQ-C
-    '''
-    query = "Plot the five most common secondary diagnoses."
-
-    Erwarteter Code:
-        import matplotlib.pyplot as plt
-
         required = {'Finding', 'Value'}
         missing = required.difference(df.columns)
         if missing:
@@ -77,27 +22,8 @@ def run_llm_output(df):
         plt.title('Top 5 secondary diagnoses')
         plt.tight_layout()
         plt.show()
-
-    '''
-
-         #RQ-D
-    '''
-    query = "How many the HBA1C values has each diagnosed patient?"
-
-    Erwarteter Code:
-        required = {'Finding', 'Value', 'MPINumber'}
-        missing = required.difference(df.columns)
-        if missing:
-            raise ValueError(f'Missing required columns: {missing}')
-
-        diag_patients = df.loc[df['Finding'] == 'Diagnose', 'MPINumber'].unique()
-        mask_hba1c = df['Finding'].str.contains('HBA1C', case=False, na=False)
-        subset = df.loc[mask_hba1c & df['MPINumber'].isin(diag_patients)]
-
-        counts = subset.groupby('MPINumber').size()
-        print(counts)
-
-
-    '''
+    #############################
 
 run_llm_output(df)
+
+ 
