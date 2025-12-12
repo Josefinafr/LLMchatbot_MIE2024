@@ -6,20 +6,14 @@ df = pd.read_csv("testdata_MIE.csv")
 
 def run_llm_output(df):
     #############################
-        required = {'Finding', 'Value'}
-        missing = required.difference(df.columns)
-        if missing:
-            raise ValueError(f'Missing required columns: {missing}')
+        if 'Gender' not in df.columns and 'Geschlecht' not in df.columns:
+            raise ValueError("The dataset does not contain a dedicated gender column ('Gender' or 'Geschlecht').")
 
-        mask = df['Finding'] == 'Diagnose'
-        subset = df.loc[mask]
+        col = 'Gender' if 'Gender' in df.columns else 'Geschlecht'
+        counts = df[col].value_counts()
 
-        counts = subset['Value'].value_counts().head(5)
-
-        counts.plot(kind='bar')
-        plt.xlabel('Diagnosis code')
-        plt.ylabel('Count')
-        plt.title('Top 5 secondary diagnoses')
+        plt.pie(counts.values, labels=counts.index, autopct='%1.1f%%')
+        plt.title('Gender distribution')
         plt.tight_layout()
         plt.show()
     #############################
